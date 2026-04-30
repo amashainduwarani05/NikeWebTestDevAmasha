@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIKE - Just Do It</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --nike-black: #111111;
+            --nike-white: #ffffff;
+            --nike-gray: #f5f5f5;
+            --nike-dark-gray: #707072;
+            --nike-border: #e5e5e5;
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Oswald', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--nike-black);
+            background-color: var(--nike-white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: var(--font-body);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: var(--nike-white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 100;
+            border-bottom: 1px solid var(--nike-border);
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--nike-black);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icons button {
+            font-size: 1.25rem;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--nike-black);
+            color: var(--nike-white);
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: var(--nike-white);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            transition: left 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--nike-white);
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .btn {
+            background-color: var(--nike-white);
+            color: var(--nike-black);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--nike-gray);
+            transform: scale(1.05);
+        }
+
+        .btn-dark {
+            background-color: var(--nike-black);
+            color: var(--nike-white);
+        }
+
+        .btn-dark:hover {
+            background-color: var(--nike-dark-gray);
+        }
+
+        /* Filter Section */
+        .products-section {
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--nike-border);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--nike-black);
+            color: var(--nike-white);
+            border-color: var(--nike-black);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            cursor: pointer;
+            group: card;
+        }
+
+        .product-image-container {
+            position: relative;
+            background-color: var(--nike-gray);
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-image.hover-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .product-card:hover .product-image.main-img {
+            opacity: 0;
+        }
+
+        .product-card:hover .product-image.hover-img {
+            opacity: 1;
+            transform: scale(1.05);
+            transition: opacity 0.4s ease, transform 4s ease;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .product-category {
+            color: var(--nike-dark-gray);
+            font-size: 0.9rem;
+            text-transform: capitalize;
+        }
+
+        .product-price {
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .add-to-cart-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--nike-black);
+            color: var(--nike-white);
+            border-radius: 20px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .add-to-cart-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Product Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background-color: var(--nike-white);
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            z-index: 10;
+            background: var(--nike-white);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .modal-image {
+            width: 50%;
+            object-fit: cover;
+            background-color: var(--nike-gray);
+        }
+
+        .modal-details {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .modal-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .modal-desc {
+            color: var(--nike-dark-gray);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        /* Cart Drawer */
+        .cart-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 400;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0; right: -450px;
+            width: 100%; max-width: 450px;
+            height: 100%;
+            background-color: var(--nike-white);
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .cart-drawer.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--nike-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-family: var(--font-heading);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            background-color: var(--nike-gray);
+            border-radius: 5px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--nike-dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-remove {
+            color: #ff4d4f;
+            font-size: 1.2rem;
+        }
+
+        .cart-footer {
+            padding: 20px 30px;
+            border-top: 1px solid var(--nike-border);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--nike-dark-gray);
+            margin-top: 50px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--nike-black);
+            color: var(--nike-white);
+            padding: 60px 40px 20px;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col a {
+            color: var(--nike-dark-gray);
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--nike-white);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--nike-dark-gray);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-socials a {
+            color: var(--nike-white);
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .modal-content {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            .modal-image {
+                width: 100%;
+                height: 300px;
+            }
+            .modal-details {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .products-section {
+                padding: 40px 20px;
+            }
+            .cart-drawer {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-logo">NIKE</div>
+        <div class="nav-links">
+            <a href="#" onclick="filterProducts('all', event)">New & Featured</a>
+            <a href="#" onclick="filterProducts('shoes', event)">Men</a>
+            <a href="#" onclick="filterProducts('clothing', event)">Women</a>
+            <a href="#" onclick="filterProducts('kids', event)">Kids</a>
+            <a href="#" onclick="filterProducts('sale', event)">Sale</a>
+        </div>
+        <div class="nav-icons">
+            <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button onclick="toggleCart()" aria-label="Cart">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
+            <button class="menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#" onclick="filterProducts('all', event); toggleMobileMenu()">New & Featured</a>
+        <a href="#" onclick="filterProducts('shoes', event); toggleMobileMenu()">Men</a>
+        <a href="#" onclick="filterProducts('clothing', event); toggleMobileMenu()">Women</a>
+        <a href="#" onclick="filterProducts('kids', event); toggleMobileMenu()">Kids</a>
+        <a href="#" onclick="filterProducts('sale', event); toggleMobileMenu()">Sale</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Just Do It</h1>
+            <p class="hero-subtitle">Engineered to the exact specifications of championship athletes.</p>
+            <a href="#products" class="btn">Shop Collection</a>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <main id="products" class="products-section">
+        <div class="section-header">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="filters" id="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="shoes">Shoes</button>
+                <button class="filter-btn" data-filter="clothing">Clothing</button>
+                <button class="filter-btn" data-filter="accessories">Accessories</button>
+            </div>
+        </div>
+        
+        <div class="product-grid" id="product-grid">
+            <!-- Products injected via JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Find A Store</h3>
+                <ul>
+                    <li><a href="#">Become A Member</a></li>
+                    <li><a href="#">Sign Up for Email</a></li>
+                    <li><a href="#">Send Us Feedback</a></li>
+                    <li><a href="#">Student Discounts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Get Help</h3>
+                <ul>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Delivery</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Payment Options</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>About Nike</h3>
+                <ul>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Investors</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Nike, Inc. All Rights Reserved</p>
+            <div style="display:flex; gap:15px;">
+                <a href="#">Guides</a>
+                <a href="#">Terms of Sale</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Nike Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal(event)"><i class="fa-solid fa-xmark"></i></button>
+            <img src="" alt="Product Image" class="modal-image" id="modal-image">
+            <div class="modal-details">
+                <h2 class="modal-title" id="modal-title">Product Title</h2>
+                <div class="modal-price" id="modal-price">$0</div>
+                <p class="modal-desc" id="modal-desc">Product description goes here.</p>
+                <button class="btn btn-dark" id="modal-add-btn">Add to Bag</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Bag</h2>
+            <button onclick="toggleCart()"><i class="fa-solid fa-xmark fa-xl"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items injected via JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn btn-dark checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        // Product Data
+        const products =[
+            {
+                id: 1,
+                name: "Nike Air Force 1 '07",
+                price: 115,
+                category: "shoes",
+                img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80",
+                desc: "The radiance lives on in the Nike Air Force 1 ’07, the b-ball icon that puts a fresh spin on what you know best: crisp leather, bold colors and the perfect amount of flash to make you shine."
+            },
+            {
+                id: 2,
+                name: "Nike Sportswear Club Fleece",
+                price: 60,
+                category: "clothing",
+                img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1556821840-09d3b2b8da70?auto=format&fit=crop&w=800&q=80",
+                desc: "A closet staple, the Nike Sportswear Club Fleece Pullover Hoodie combines classic style with the soft comfort of fleece for an elevated, everyday look that you really can wear every day."
+            },
+            {
+                id: 3,
+                name: "Nike Dunk Low Retro",
+                price: 115,
+                category: "shoes",
+                img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1617300713506-c87a550974ee?auto=format&fit=crop&w=800&q=80",
+                desc: "Created for the hardwood but taken to the streets, the '80s b-ball icon returns with perfectly glossed overlays and classic team colors. With its iconic hoops design, the Nike Dunk Low channels vintage style."
+            },
+            {
+                id: 4,
+                name: "Nike Dri-FIT Adv",
+                price: 45,
+                category: "clothing",
+                img: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80",
+                desc: "Stay dry, stay focused. The Nike Dri-FIT Top is made from lightweight, sweat-wicking fabric to help keep you comfortable during your toughest workouts."
+            },
+            {
+                id: 5,
+                name: "Nike Air Max 270",
+                price: 160,
+                category: "shoes",
+                img: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1550399504-8953e1a6ac87?auto=format&fit=crop&w=800&q=80",
+                desc: "Nike's first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike's greatest innovation."
+            },
+            {
+                id: 6,
+                name: "Nike Heritage Backpack",
+                price: 40,
+                category: "accessories",
+                img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80",
+                desc: "Grab your gear and go with the Nike Heritage Backpack. A spacious main compartment stores your essentials, while a smaller front pocket offers easy access."
+            },
+            {
+                id: 7,
+                name: "Nike ZoomX Vaporfly",
+                price: 250,
+                category: "shoes",
+                img: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1584735174965-48c48d4eff6a?auto=format&fit=crop&w=800&q=80",
+                desc: "Continue the next evolution of speed with a racing shoe made to help you chase new goals and records. The Nike ZoomX Vaporfly Next% 2 builds on the model racers everywhere love."
+            },
+            {
+                id: 8,
+                name: "Nike Swoosh Headband",
+                price: 15,
+                category: "accessories",
+                img: "https://images.unsplash.com/photo-1575404555819-217998ce7db0?auto=format&fit=crop&w=800&q=80",
+                hoverImg: "https://images.unsplash.com/photo-1582885994354-9a4f49b142de?auto=format&fit=crop&w=800&q=80",
+                desc: "Keep the sweat out of your eyes and focus on your game with the Nike Swoosh Headband, made with stretchy, absorbent material."
+            }
+        ];
+
+        // State
+        let cart = JSON.parse(localStorage.getItem('nike-cart')) ||[];
+        
+        // DOM Elements
+        const productGrid = document.getElementById('product-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cartCount = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        
+        // Initialize
+        function init() {
+            renderProducts('all');
+            updateCartUI();
+            
+            // Filter listeners
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderProducts(e.target.dataset.filter);
+                });
+            });
+        }
+
+        // Render Products
+        function renderProducts(filter) {
+            productGrid.innerHTML = '';
+            
+            const filteredProducts = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+                
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => openModal(product.id);
+                
+                card.innerHTML = `
+                    <div class="product-image-container">
+                        <img src="${product.img}" alt="${product.name}" class="product-image main-img">
+                        <img src="${product.hoverImg}" alt="${product.name} Hover" class="product-image hover-img">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-category">${product.category}</div>
+                        <div class="product-price">$${product.price}</div>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${product.id})">
+                            Add to Bag
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        // Filter from Nav Links
+        function filterProducts(category, event) {
+            event.preventDefault();
+            document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });
+            
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                if (b.dataset.filter === category || (category === 'sale' && b.dataset.filter === 'all') || (category === 'kids' && b.dataset.filter === 'all')) {
+                    if(b.dataset.filter === category) b.classList.add('active');
+                }
+            });
+            
+            if (category === 'sale' || category === 'kids') {
+                document.querySelector('[data-filter="all"]').classList.add('active');
+                renderProducts('all');
+            } else {
+                renderProducts(category);
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Modal Logic
+        function openModal(id) {
+            const product = products.find(p => p.id === id);
+            if(!product) return;
+
+            document.getElementById('modal-image').src = product.img;
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-price').textContent = `$${product.price}`;
+            document.getElementById('modal-desc').textContent = product.desc;
+            
+            const addBtn = document.getElementById('modal-add-btn');
+            addBtn.onclick = () => {
+                addToCart(product.id);
+                closeModal();
+                toggleCart();
+            };
+
+            document.getElementById('modal-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(e) {
+            if (e && e.target.id !== 'modal-overlay' && !e.target.closest('.modal-close')) return;
+            document.getElementById('modal-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cart Logic
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('active');
+            document.getElementById('cart-overlay').classList.toggle('active');
+            
+            if (document.getElementById('cart-drawer').classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            saveCart();
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            updateCartUI();
+        }
+
+        function saveCart() {
+            localStorage.setItem('nike-cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            // Update badge count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Render items
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart">Your bag is empty.</div>';
+                cartTotalPrice.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">$${item.price} x ${item.quantity}</div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            
+            cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Run
+        init();
+
+    </script>
+</body>
+</html>
